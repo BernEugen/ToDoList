@@ -7,26 +7,36 @@ import java.util.Scanner;
  * Time: 17:13
  */
 public class Console {
-    private static Scanner scan;
 
-    public Console() {
-        scan = new Scanner(System.in);
+    public String scanInput() {
+        Scanner scan = new Scanner(System.in);
+        return scan.nextLine();
     }
 
-    public String getString() {
-        String temp = scan.nextLine();
-        if (scan.hasNext()) {
-            temp = scan.nextLine();
+
+    public int scanInt() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanInput());
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Enter correct value!");
+            }
         }
-        return temp;
     }
 
-    public int getInt() {
-        try {
-            return Integer.parseInt(scan.next());
-        } catch (IllegalArgumentException ex) {
+    public String taskInput() {
+        System.out.println("Enter Task :");
+        return scanInput();
+    }
 
+    public int priorityInput() {
+        while (true) {
+            System.out.println("Enter Priority :");
+            try {
+                return Integer.parseInt(scanInput());
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Must be a number!");
+            }
         }
-        return 0;
     }
 }
