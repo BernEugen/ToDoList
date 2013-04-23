@@ -1,6 +1,3 @@
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.QueryBuilder;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +27,9 @@ public class TestTask {
         String testText = "Test create Task";
         int testPriority = 5;
         testTask = new Task(testText, testPriority);
-        int id = testDaoHelper.addList(testTask);
+        int id = testDaoHelper.addTask(testTask);
 
-        List<Task> testList = testDaoHelper.getQuery();
+        List<Task> testList = testDaoHelper.getList();
         Assert.assertEquals(testText, testList.get(testList.size() - 1).getTask());
         Assert.assertEquals(testPriority, testList.get(testList.size() - 1).getPriority());
 

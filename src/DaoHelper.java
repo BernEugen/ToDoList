@@ -7,7 +7,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,22 +26,13 @@ public class DaoHelper {
         TableUtils.createTableIfNotExists(connectionSource, Task.class);
     }
 
-    public int addList(Task task) throws SQLException {
+    public int addTask(Task task) throws SQLException {
         daoList.create(task);
         return daoList.extractId(task);
     }
 
-    public void showList(Task task) throws SQLException{
-        CloseableIterator<Task> iterator = daoList.closeableIterator();
-        try {
-            while (iterator.hasNext()) {
-                task = iterator.next();
-                System.out.println("#" + task.getId() + " " + task.getTask() +
-                        " (" + task.getPriority() + ")");
-            }
-        } finally {
-            iterator.close();
-        }
+    public List<Task> getList() throws SQLException{
+        return daoList.queryForAll();
     }
 
     public boolean deleteTask(int id) throws SQLException {
@@ -51,10 +41,6 @@ public class DaoHelper {
             return true;
         }
         return false;
-    }
-
-    public List<Task> getQuery() throws SQLException {
-        return daoList.queryForAll();
     }
 
     public boolean isIdExist(int id) throws SQLException{

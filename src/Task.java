@@ -45,9 +45,4 @@ public class Task {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-
-    @Override
-    public String toString() {
-        return "id: " + id + " task: " + newTask + " priority: " + priority;
-    }
 }

@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +31,7 @@ public class TaskLauncher {
         switch (readConsole) {
             case 1:
                 task = createTask();
-                int id = dbHelper.addList(task);
+                int id = dbHelper.addTask(task);
                 System.out.println("Added #" + id);
                 break;
 
@@ -45,7 +46,7 @@ public class TaskLauncher {
                 break;
 
             case 3:
-                dbHelper.showList(task);
+                getTaskList();
                 break;
 
             default:
@@ -59,6 +60,14 @@ public class TaskLauncher {
         task.setPriority(console.priorityInput());
         return new Task(task.getTask(), task.getPriority());
     }
+
+    public void getTaskList() throws SQLException {
+        List<Task> taskList = dbHelper.getList();
+        for (Task task : taskList) {
+            System.out.println("#" + task.getId() + " " + task.getTask() +
+                    " (" + task.getPriority() + ")");
+        }
+    } 
 
     public void menuInfo() {
         System.out.println("\n" + "1-> Add task");
